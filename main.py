@@ -22,8 +22,10 @@ class Form_Data:
         self.email = self.raw_form_data["Email address"]
         if self.raw_form_data["Reviewed"] == "Approved":
             self.reviewed = True
-            
-        self.fields = [{"question": key, "answer": value} for key, value in self.raw_form_data.items() if key != "Email address" and key != "Reviewed" and key != "Timestamp"]
+        
+        excluded_keys = ["Email address", "Reviewed", "Timestamp"]
+        
+        self.fields = [{"question": key, "answer": value} for key, value in self.raw_form_data.items() if key not in excluded_keys]
 
 
     def __str__(self) -> str:
