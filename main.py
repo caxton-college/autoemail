@@ -23,7 +23,7 @@ class Form_Data:
         if self.raw_form_data["Reviewed"] == "Approved":
             self.reviewed = True
             
-        self.fields = [{"question": key, "answer": value} for key, value in self.raw_form_data.items() if key != "Email address" and key != "Reviewed"]
+        self.fields = [{"question": key, "answer": value} for key, value in self.raw_form_data.items() if key != "Email address" and key != "Reviewed" and key != "Timestamp"]
 
 
     def __str__(self) -> str:
