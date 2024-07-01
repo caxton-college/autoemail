@@ -1,1 +1,2 @@
 fastapi[all]
+fastapi-mail==1.4.1
