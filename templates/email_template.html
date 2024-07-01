@@ -15,6 +15,7 @@
     {% if reviewed == True %}
         {% for field in questions %}
             {{ field["question"] }} : {{ field["answer"] }}
+            <br>
         {% endfor %}
     {% else %}
         <p>Your form has been rejected</p>

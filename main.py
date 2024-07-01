@@ -67,11 +67,6 @@ async def root():
     return {"message": "API running"}
 
 
-@app.post("/item/")
-def form_data(form: dict) -> dict:
-    return form
-
-
 @app.post("/update/")
 async def form_update(
     background_tasks: BackgroundTasks,
