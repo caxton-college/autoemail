@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Template</title>
+    <style>
+        
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+    </style>
+</head>
+<body>
+    <h3>Form response</h3>
+    {% if reviewed == True %}
+        {% for field in questions %}
+            {{ field["question"] }} : {{ field["answer"] }}
+        {% endfor %}
+    {% else %}
+        <p>Your form has been rejected</p>
+    {% endif %}
+</body>
+</html>
