@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict
+from typing import List, Dict, Any
 from pathlib import Path
 from dataclasses import dataclass, field
 
@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from fastapi import FastAPI, BackgroundTasks
 from starlette.responses import JSONResponse
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
-from pydantic import EmailStr, BaseModel
+from pydantic import EmailStr
 from dotenv import load_dotenv
 
 
@@ -72,7 +72,7 @@ async def root():
 @app.post("/update/")
 async def form_update(
     background_tasks: BackgroundTasks,
-    raw_form_data: Dict[str, str]
+    raw_form_data: Dict[str, Any]
     ) -> JSONResponse:
     
     form_data = Form_Data(raw_form_data=raw_form_data)
