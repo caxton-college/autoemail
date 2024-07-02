@@ -130,22 +130,10 @@
                 </ul>
             </div>
             <div class="message">
-                <p>Agradecemos su colaboración, por favor responda el formulario de nuevo si cree que esto fue un error</p>
+                <p>Agradecemos su colaboración, por favor rellene el formulario de nuevo si cree que esto fue un error</p>
                 <p>Gracias</p>
             </div>
         {% endif %}
     </div>
 </body>
 </html>
-
-
-
-
-    {% if approved == True %}
-        {% for field in questions %}
-            {{ field["question"] }} : {{ field["answer"] }}
-            <br>
-        {% endfor %}
-    {% else %}
-        <p>Your form has been rejected</p>
-    {% endif %}
