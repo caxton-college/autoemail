@@ -16,12 +16,12 @@ class Form_Data:
     raw_form_data: Dict[str, str] = field(default_factory=dict)
     email: EmailStr  = field(default=None, init=False)
     fields: List[Dict[str, str]] = field(default=None, init=False)
-    reviewed: bool = field(default=False, init=False)
+    approved: bool = field(default=False, init=False)
     
     def __post_init__(self) -> None:
         self.email = self.raw_form_data["Email address"]
         if self.raw_form_data["Reviewed"] == "Approved":
-            self.reviewed = True
+            self.approved = True
         
         excluded_keys = ["Email address", "Reviewed", "Timestamp"]
         
@@ -54,7 +54,7 @@ async def send_email(background_tasks: BackgroundTasks, form_data: Form_Data) ->
     message = MessageSchema(
         subject="Fastapi mail module",
         recipients=[form_data.email],
-        template_body={"questions": form_data.fields, "reviewed": form_data.reviewed},
+        template_body={"questions": form_data.fields, "approved": form_data.approved},
         subtype=MessageType.html
     )
 

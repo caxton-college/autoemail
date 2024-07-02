@@ -1,18 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Email Template</title>
     <style>
-        
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
         }
         
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        li {
+            margin-bottom: 5px;
+        }
+        
+        .options {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .message {
+            background-color: #eef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
-    <h3>Form response</h3>
-    {% if reviewed == True %}
+    <div class="container">
+        {% if approved == True %}
+        <h1>Your Response</h1>
+        <p>Thank you for taking the time to answer</p>
+        <p>You have chosen the following options:</p>
+        <div class="options">
+            <ul>
+                <li>Option 1: <strong>{{ option1 }}</strong></li>
+                <li>Option 2: <strong>{{ option2 }}</strong></li>
+                <li>Option 3: <strong>{{ option3 }}</strong></li>
+                {% for field in questions %}
+                    <li>{{ field["question"] }}: <strong>{{ field["answer"] }}</strong></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="message">
+            <p>We appreciate your feedback and value your input.</p>
+            <p>Thank you again for participating in our survey.</p>
+        </div>
+        {% else %}
+            <h2>Your form has been rejected</h2>
+            <p>We appreciate you for taking the time to answer our survey, but unfortunately, your form has been rejected due to the following reasons:</p>
+            <ul>
+                <li>Some of the answers were not coherent with the questions.</li>
+                <li>The form was not filled completely.</li>
+                <li>The answers were not clear or were not understandable.</li>
+            </ul>
+            <p>We value your feedback and appreciate your input.</p>
+            <p>Thank you again for participating in our survey.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
+
+
+    {% if approved == True %}
         {% for field in questions %}
             {{ field["question"] }} : {{ field["answer"] }}
             <br>
@@ -20,5 +102,3 @@
     {% else %}
         <p>Your form has been rejected</p>
     {% endif %}
-</body>
-</html>
