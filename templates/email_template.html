@@ -41,6 +41,13 @@
             margin-bottom: 5px;
         }
         
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
+
         .options {
             background-color: #f9f9f9;
             padding: 10px;
@@ -59,33 +66,73 @@
 <body>
     <div class="container">
         {% if approved == True %}
-        <h1>Your Response</h1>
-        <p>Thank you for taking the time to answer</p>
-        <p>You have chosen the following options:</p>
-        <div class="options">
-            <ul>
-                <li>Option 1: <strong>{{ option1 }}</strong></li>
-                <li>Option 2: <strong>{{ option2 }}</strong></li>
-                <li>Option 3: <strong>{{ option3 }}</strong></li>
-                {% for field in questions %}
-                    <li>{{ field["question"] }}: <strong>{{ field["answer"] }}</strong></li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="message">
-            <p>We appreciate your feedback and value your input.</p>
-            <p>Thank you again for participating in our survey.</p>
-        </div>
+            <h1>Form response information</h1>
+            <p>Thank you for taking the time to answer</p>
+            <p>You have chosen the following options:</p>
+            <div class="options">
+                <ul>
+                    {% for field in questions %}
+                        <li>{{ field["question"] }}: <strong>{{ field["answer"] }}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="message">
+                <p>We appreciate your colaboration</p>
+                <p>Thank you again for answering</p>
+            </div>
+            
+            <br>
+            <hr>
+            <br>
+
+            <h1>Información sobre formulario</h1>
+            <p>Muchas gracias por contestar</p>
+            <p>Ha seleccionado las siguientes opciones:</p>
+            <div class="options">
+                <ul>
+                    {% for field in questions %}
+                        <li>{{ field["question"] }}: <strong>{{ field["answer"] }}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="message">
+                <p>Agradecemos su colaboración</p>
+                <p>Gracias</p>
+            </div>
+
+
         {% else %}
-            <h2>Your form has been rejected</h2>
-            <p>We appreciate you for taking the time to answer our survey, but unfortunately, your form has been rejected due to the following reasons:</p>
-            <ul>
-                <li>Some of the answers were not coherent with the questions.</li>
-                <li>The form was not filled completely.</li>
-                <li>The answers were not clear or were not understandable.</li>
-            </ul>
-            <p>We value your feedback and appreciate your input.</p>
-            <p>Thank you again for participating in our survey.</p>
+            <h1>Your form has been rejected</h1>
+            <p>We appreciate you for taking the time to answer our survey, but unfortunately, your form may have been rejected due to some of the following reasons:</p>
+            <div class="options">
+                <ul>
+                    <li>Some of the answers were not coherent with the questions.</li>
+                    <li>The form was not filled completely.</li>
+                    <li>The answers were not clear or were not understandable.</li>
+                </ul>
+            </div>
+            <div class="message">
+                <p>We appreciate your input, please answer the survey again if you believe this was a mistake</p>
+                <p>Thank you</p>
+            </div>
+
+            <br>
+            <hr>
+            <br>
+
+            <h1>Su respuesta ha sido rechazada</h1>
+            <p>Agradecemos su colaboración pero no podemos aceptar su respuesta debido a algunos de los siguientes motivos:</p>
+            <div class="options">
+                <ul>
+                    <li>Algunas de las respuestas no eran coherentes con las preguntas.</li>
+                    <li>El formulario no se contestó completamente.</li>
+                    <li>Las respuestas no estaban claras o no eran comprensibles.</li>
+                </ul>
+            </div>
+            <div class="message">
+                <p>Agradecemos su colaboración, por favor responda el formulario de nuevo si cree que esto fue un error</p>
+                <p>Gracias</p>
+            </div>
         {% endif %}
     </div>
 </body>
