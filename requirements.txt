@@ -1,2 +1,3 @@
 fastapi[all]
 fastapi-mail==1.4.1
+python-dateutil==2.9.0
