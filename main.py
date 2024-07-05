@@ -114,7 +114,8 @@ conf = ConnectionConfig(
 
 app = FastAPI()
 
-
+"""
+Every time a different host sends the request, this won't work :(
 # Whitelisted IPs
 WHITELISTED_IPS = [os.getenv('ALLOWED_IP')] # Secret ip
 
@@ -132,7 +133,7 @@ async def validate_ip(request: Request, call_next):
 
     # Proceed if IP is allowed
     return await call_next(request)
-
+"""
 
 @app.get("/")
 async def root():
