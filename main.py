@@ -4,7 +4,7 @@ from pathlib import Path
 from dataclasses import dataclass, field
 
 
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, BackgroundTasks, Request, status
 from starlette.responses import JSONResponse
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from pydantic import EmailStr
@@ -113,6 +113,25 @@ conf = ConnectionConfig(
 
 
 app = FastAPI()
+
+
+# Whitelisted IPs
+WHITELISTED_IPS = [os.getenv('ALLOWED_IP')] # Secret ip
+
+@app.middleware('http')
+async def validate_ip(request: Request, call_next):
+    # Get client IP
+    ip = str(request.client.host)
+    
+    # Check if IP is allowed
+    if ip not in WHITELISTED_IPS:
+        data = {
+            'message': f'IP {ip} is not allowed to access this resource.'
+        }
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content=data)
+
+    # Proceed if IP is allowed
+    return await call_next(request)
 
 
 @app.get("/")
